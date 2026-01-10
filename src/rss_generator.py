@@ -5,7 +5,7 @@ RSS 生成模块
 
 import os
 from typing import List, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 from feedgen.feed import FeedGenerator
 
 
@@ -31,7 +31,7 @@ def generate_rss(videos: List[Dict[str, Any]],
     fg.description(feed_description)
     fg.link(href=feed_link, rel='alternate')
     fg.language('zh-CN')
-    fg.lastBuildDate(datetime.now())
+    fg.lastBuildDate(datetime.now(timezone.utc))
 
     # 按日期排序
     sorted_videos = sorted(videos,
@@ -63,7 +63,7 @@ def generate_rss(videos: List[Dict[str, Any]],
         # 设置发布日期
         if upload_date:
             try:
-                pub_date = datetime.strptime(upload_date, '%Y-%m-%d')
+                pub_date = datetime.strptime(upload_date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
                 fe.pubDate(pub_date)
             except ValueError:
                 pass
