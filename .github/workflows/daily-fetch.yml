@@ -36,9 +36,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Setup YouTube cookies
+        env:
+          YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
+        run: |
+          if [ -n "$YOUTUBE_COOKIES" ]; then
+            echo "$YOUTUBE_COOKIES" | base64 -d > cookies.txt
+            echo "Cookies file created"
+          else
+            echo "No cookies configured"
+          fi
+
       - name: Run YouTube fetcher
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_COOKIES_FILE: cookies.txt
         run: |
           python src/main.py
 
