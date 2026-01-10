@@ -1,0 +1,28 @@
+# YouTube 频道订阅配置
+# 添加你想要订阅的频道
+
+channels:
+  - name: "Peter Yang"
+    url: "https://www.youtube.com/@PeterYangYT"
+    category: "产品/创业"
+
+  - name: "Every"
+    url: "https://www.youtube.com/@EveryInc"
+    category: "商业/AI"
+
+  # - name: "频道名称"
+  #   url: "https://www.youtube.com/@channel_handle"
+  #   category: "分类"
+
+# 配置选项
+settings:
+  # 每个频道获取最近多少个视频
+  max_videos_per_channel: 1
+  # 字幕语言优先级 (按顺序尝试)
+  subtitle_languages:
+    - "zh-Hans"
+    - "zh-Hant"
+    - "zh"
+    - "en"
+  # 是否使用自动生成的字幕
+  use_auto_subtitles: true
